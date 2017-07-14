@@ -12,14 +12,24 @@
 
     <com.rafao.codescanner.camera.CameraSourcePreview
         android:id="@+id/camera_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <com.rafao.codescanner.camera.GraphicOverlay
             android:id="@+id/camera_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </com.rafao.codescanner.camera.CameraSourcePreview>
+
+    <TextView
+        android:id="@+id/textview_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:textAlignment="center"
+        android:text="@string/code_scan_prompt_hint"
+        android:textColor="@android:color/white"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
 </LinearLayout>

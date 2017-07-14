@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">CodeScanner</string>
 
-    <string name="code_scan_dialog_prompt_title">Could not read code contents.</string>
-    <string name="code_scan_dialog_prompt_hint">Would you like to type?</string>
+    <string name="code_scan_prompt_hint">Posicione o imagem do código no leitor.</string>
+    <string name="code_scan_dialog_prompt_title">Não foi possível fazer a leitura.</string>
+    <string name="code_scan_dialog_prompt_hint">Gostaria de digitar?</string>
 
-    <string name="action_submit">Submit</string>
-    <string name="action_try_again">Try again</string>
+    <string name="action_submit">Enviar</string>
+    <string name="action_try_again">Tentar novamente</string>
 
-    <string name="error_low_storage">Code detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="error_low_storage">Code detector dependencies cannot be downloaded due to low device storage.</string>
 
 </resources>

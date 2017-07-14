@@ -44,19 +44,22 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     private AlertDialog dialog;
 
     private final Handler handler = new Handler();
-    private final int timer = 10000;
+    private final int timer = 25000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_scan);
 
-        loadComponents();
+        loadComponents(getIntent().getIntExtra("width", 2500), getIntent().getIntExtra("height", 640));
         loadActions();
     }
 
-    private void loadComponents() {
+    private void loadComponents(int width, int height) {
         cameraView = (CameraSourcePreview) findViewById(R.id.camera_view);
+        cameraView.getLayoutParams().width = width;
+        cameraView.getLayoutParams().height = height;
+
         cameraOverlay = (GraphicOverlay) findViewById(R.id.camera_overlay);
 
         final Runnable runnable = this;
