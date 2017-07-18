@@ -34,10 +34,9 @@ import com.rafao.codescanner.dialog.DialogUtils;
 public class CodeScanActivity extends AppCompatActivity implements com.rafao.codescanner.codescan.CameraResult, Runnable {
 
     private final int PERMISSIONS_REQUEST_CAMERA = 1;
-    private final int HANDLE_GMS = 9001;
 
     private CameraSourcePreview cameraView;
-    private GraphicOverlay cameraOverlay, cameraOverlayTop, cameraOverlayBottom;
+    private GraphicOverlay cameraOverlay;
 
     private CameraSource cameraSource;
 
@@ -60,10 +59,10 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
 
         cameraOverlay = (GraphicOverlay) findViewById(R.id.camera_overlay);
 
-        cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
+        GraphicOverlay cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
         cameraOverlayTop.getBackground().setAlpha(150);
 
-        cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
+        GraphicOverlay cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
         cameraOverlayBottom.getBackground().setAlpha(150);
 
         final Runnable runnable = this;
@@ -130,6 +129,7 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());
         if (code != ConnectionResult.SUCCESS) {
+            final int HANDLE_GMS = 9001;
             Dialog dialog = GoogleApiAvailability
                     .getInstance().getErrorDialog(this, code, HANDLE_GMS);
             dialog.show();
