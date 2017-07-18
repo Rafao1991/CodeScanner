@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@android:color/black"
+    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     tools:context=".codescan.CodeScanActivity">
 
     <com.rafao.codescanner.camera.CameraSourcePreview
         android:id="@+id/camera_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
 
         <com.rafao.codescanner.camera.GraphicOverlay
             android:id="@+id/camera_overlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </com.rafao.codescanner.camera.CameraSourcePreview>
+
+    <com.rafao.codescanner.camera.GraphicOverlay
+        android:id="@+id/camera_overlay_top"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimary"/>
+
+    <com.rafao.codescanner.camera.GraphicOverlay
+        android:id="@+id/camera_overlay_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/textview_message"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:textAlignment="center"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textAlignment="gravity"
         android:text="@string/code_scan_prompt_hint"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorAccent"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-</LinearLayout>
+</FrameLayout>

@@ -37,7 +37,7 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     private final int HANDLE_GMS = 9001;
 
     private CameraSourcePreview cameraView;
-    private GraphicOverlay cameraOverlay;
+    private GraphicOverlay cameraOverlay, cameraOverlayTop, cameraOverlayBottom;
 
     private CameraSource cameraSource;
 
@@ -51,16 +51,20 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_scan);
 
-        loadComponents(getIntent().getIntExtra("width", 2500), getIntent().getIntExtra("height", 640));
+        loadComponents();
         loadActions();
     }
 
-    private void loadComponents(int width, int height) {
+    private void loadComponents() {
         cameraView = (CameraSourcePreview) findViewById(R.id.camera_view);
-        cameraView.getLayoutParams().width = width;
-        cameraView.getLayoutParams().height = height;
 
         cameraOverlay = (GraphicOverlay) findViewById(R.id.camera_overlay);
+
+        cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
+        cameraOverlayTop.getBackground().setAlpha(150);
+
+        cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
+        cameraOverlayBottom.getBackground().setAlpha(150);
 
         final Runnable runnable = this;
         dialog = DialogUtils.createInputDialog(
