@@ -197,12 +197,13 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     @Override
     public void onResult(Barcode barcode) {
         if (!barcode.rawValue.isEmpty()) {
-            sendResultIntent(barcode.rawValue);
+            if (barcode.rawValue.length() > 40)
+                sendResultIntent(barcode.rawValue);
         } else {
             back();
         }
 
-        Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
     }
 
     private void sendResultIntent(String value) {
