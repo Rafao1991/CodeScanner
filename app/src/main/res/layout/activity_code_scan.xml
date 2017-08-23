@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     tools:context=".codescan.CodeScanActivity">
 
@@ -27,24 +26,30 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="top"
-        android:background="@color/colorPrimary"/>
+        android:background="#0097A7"/>
+
+    <com.rafao.codescanner.camera.GraphicOverlay
+        android:id="@+id/camera_overlay_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#76ff03"/>
 
     <com.rafao.codescanner.camera.GraphicOverlay
         android:id="@+id/camera_overlay_bottom"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"/>
+        android:background="#0097A7"/>
 
     <TextView
         android:id="@+id/textview_message"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:textAlignment="gravity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:text="@string/code_scan_prompt_hint"
-        android:textColor="@color/colorAccent"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        android:textColor="#FFFFFF"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
 </FrameLayout>

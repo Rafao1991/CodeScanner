@@ -38,14 +38,14 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     private final int PERMISSIONS_REQUEST_CAMERA = 1;
 
     private CameraSourcePreview cameraView;
-    private GraphicOverlay cameraOverlay;
+    private GraphicOverlay cameraOverlay, cameraOverlayTop, cameraOverlayBottom;
 
     private CameraSource cameraSource;
 
     private AlertDialog dialog;
 
     private final Handler handler = new Handler();
-    private final int timer = 25000;
+    private final int timer = 12000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,10 +63,10 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
 
         cameraOverlay = (GraphicOverlay) findViewById(R.id.camera_overlay);
 
-        GraphicOverlay cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
+        cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
         cameraOverlayTop.getBackground().setAlpha(150);
 
-        GraphicOverlay cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
+        cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
         cameraOverlayBottom.getBackground().setAlpha(150);
 
         final Runnable runnable = this;
@@ -175,6 +175,9 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     protected void onResume() {
         super.onResume();
         startCameraSource();
+
+        cameraOverlayTop.getBackground().setAlpha(150);
+        cameraOverlayBottom.getBackground().setAlpha(150);
     }
 
     @Override
@@ -182,6 +185,9 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         super.onPause();
         cameraView.stop();
         handler.removeCallbacks(this);
+
+        cameraOverlayTop.getBackground().setAlpha(255);
+        cameraOverlayBottom.getBackground().setAlpha(255);
     }
 
     @Override
@@ -192,6 +198,8 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         }
 
         handler.removeCallbacks(this);
+        cameraOverlayTop.getBackground().setAlpha(255);
+        cameraOverlayBottom.getBackground().setAlpha(255);
     }
 
     @Override
