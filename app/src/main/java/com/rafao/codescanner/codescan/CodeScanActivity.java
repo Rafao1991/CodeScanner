@@ -223,8 +223,6 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         } else {
             back();
         }
-
-        //Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
     }
 
     private void sendResultIntent(String value) {

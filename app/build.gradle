@@ -1,14 +1,21 @@
 apply plugin: 'com.android.library'
 
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        archivesBaseName = "code_scanner_$versionName"
     }
     buildTypes {
         release {
