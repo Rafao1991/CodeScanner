@@ -26,21 +26,21 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="top"
-        android:background="#0097A7"/>
+        android:background="@color/colorOverlay"/>
 
     <com.rafao.codescanner.camera.GraphicOverlay
         android:id="@+id/camera_overlay_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center"
-        android:background="#76ff03"/>
+        android:background="@color/colorLine"/>
 
     <com.rafao.codescanner.camera.GraphicOverlay
         android:id="@+id/camera_overlay_bottom"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:background="#0097A7"/>
+        android:background="@color/colorOverlay"/>
 
     <TextView
         android:id="@+id/textview_message"
@@ -49,7 +49,19 @@
         android:layout_gravity="top"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:text="@string/code_scan_prompt_hint"
-        android:textColor="#FFFFFF"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/button_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/colorButtonBackground"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/code_scan_prompt_button"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorButtonText"/>
 
 </FrameLayout>

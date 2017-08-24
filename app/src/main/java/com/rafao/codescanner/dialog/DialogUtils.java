@@ -25,7 +25,7 @@ public class DialogUtils {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_confirmation, null);
 
         final TextView textviewTitle = view.findViewById(R.id.textview_message);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.font_grey_main));
+        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
         textviewTitle.setText(message);
 
         return new AlertDialog.Builder(context)
@@ -47,7 +47,7 @@ public class DialogUtils {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_confirmation, null);
 
         final TextView textviewTitle = view.findViewById(R.id.textview_message);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.font_grey_main));
+        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
         textviewTitle.setText(message);
 
         return new AlertDialog.Builder(context)
@@ -71,13 +71,13 @@ public class DialogUtils {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_input, null);
 
         final TextView textviewTitle = view.findViewById(R.id.textview_title);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.font_grey_main));
+        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
         textviewTitle.setText(message);
 
         final EditText edittextContent = view.findViewById(R.id.edittext_content);
-        textviewTitle.setHintTextColor(ContextCompat.getColor(context, R.color.font_grey_secondary));
+        textviewTitle.setHintTextColor(ContextCompat.getColor(context, R.color.fontGreySecondary));
         edittextContent.setHint(hint);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.font_grey_main));
+        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
 
         return new AlertDialog.Builder(context)
                 .setView(view)

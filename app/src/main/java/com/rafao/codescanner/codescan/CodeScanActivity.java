@@ -16,8 +16,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -44,6 +46,8 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
 
     private AlertDialog dialog;
 
+    private Button buttonType;
+
     private final Handler handler = new Handler();
     private final int timer = 12000;
 
@@ -68,6 +72,8 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
 
         cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
         cameraOverlayBottom.getBackground().setAlpha(150);
+
+        buttonType = (Button) findViewById(R.id.button_type);
 
         final Runnable runnable = this;
         dialog = DialogUtils.createInputDialog(
@@ -106,6 +112,13 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
             createCameraSource();
             handler.postDelayed(this, timer);
         }
+
+        buttonType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
     }
 
     private void createCameraSource() {

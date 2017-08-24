@@ -13,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/font_grey_main"/>
+        android:textColor="@color/fontGreyMain"/>
 
     <EditText
         android:id="@+id/edittext_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:textColor="@color/font_grey_secondary"
+        android:textColor="@color/fontGreySecondary"
         android:labelFor="@+id/edittext_content"/>
 
 </LinearLayout>

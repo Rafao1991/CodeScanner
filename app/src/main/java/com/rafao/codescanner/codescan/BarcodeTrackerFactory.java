@@ -78,7 +78,7 @@ class BarcodeGraphic extends TrackedGraphic<Barcode> {
         rectPaint.setStrokeWidth(10.0f);
 
         this.cameraResult = cameraResult;
-        COLOR_CHOICES[0] = ContextCompat.getColor(context, R.color.colorPrimary);
+        COLOR_CHOICES[0] = ContextCompat.getColor(context, R.color.colorChoice);
     }
 
     /**

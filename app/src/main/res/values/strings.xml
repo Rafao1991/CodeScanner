@@ -2,6 +2,7 @@
     <string name="app_name">CodeScanner</string>
 
     <string name="code_scan_prompt_hint">Posicione o imagem do código no leitor.</string>
+    <string name="code_scan_prompt_button">DIGITE O CÓDIGO DE BARRAS</string>
     <string name="code_scan_dialog_prompt_title">Não foi possível fazer a leitura.</string>
     <string name="code_scan_dialog_prompt_hint">Gostaria de digitar?</string>
 

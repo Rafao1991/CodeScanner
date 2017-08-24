@@ -13,6 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/font_grey_main"/>
+        android:textColor="@color/fontGreyMain"/>
 
 </LinearLayout>
