@@ -29,17 +29,32 @@
         android:background="@color/colorOverlay"/>
 
     <com.rafao.codescanner.camera.GraphicOverlay
+        android:id="@+id/camera_overlay_end"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/colorOverlay"/>
+
+    <com.rafao.codescanner.camera.GraphicOverlay
         android:id="@+id/camera_overlay_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center"
-        android:background="@color/colorLine"/>
+        android:background="@color/colorLine"
+        android:visibility="gone"/>
 
     <com.rafao.codescanner.camera.GraphicOverlay
         android:id="@+id/camera_overlay_bottom"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
+        android:background="@color/colorOverlay"/>
+
+    <com.rafao.codescanner.camera.GraphicOverlay
+        android:id="@+id/camera_overlay_start"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@color/colorOverlay"/>
 
     <TextView
