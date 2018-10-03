@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,6 +22,9 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:textColor="@color/fontGreySecondary"
-        android:labelFor="@+id/edittext_content"/>
+        android:labelFor="@+id/edittext_content"
+        android:hint="@string/code_scan_dialog_prompt_hint"
+        tools:targetApi="o"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

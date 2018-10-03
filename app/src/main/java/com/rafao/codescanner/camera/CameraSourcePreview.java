@@ -41,8 +41,8 @@ import java.lang.reflect.Field;
 public class CameraSourcePreview extends ViewGroup {
     private static final String TAG = "CameraSourcePreview";
 
-    private Context mContext;
-    private SurfaceView mSurfaceView;
+    private final Context mContext;
+    private final SurfaceView mSurfaceView;
     private boolean mStartRequested;
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
@@ -60,7 +60,7 @@ public class CameraSourcePreview extends ViewGroup {
         addView(mSurfaceView);
     }
 
-    public void start(CameraSource cameraSource) throws IOException {
+    private void start(CameraSource cameraSource) throws IOException {
         if (cameraSource == null) {
             stop();
         }
@@ -84,13 +84,6 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
-    public void release() {
-        if (mCameraSource != null) {
-            mCameraSource.release();
-            mCameraSource = null;
-        }
-    }
-
     private void startIfReady() throws IOException {
         if (mStartRequested && mSurfaceAvailable) {
             if (ActivityCompat.checkSelfPermission(
@@ -98,7 +91,7 @@ public class CameraSourcePreview extends ViewGroup {
                 return;
 
             mCameraSource.start(mSurfaceView.getHolder());
-            cameraFocus(mCameraSource, Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            cameraFocus(mCameraSource);
             if (mOverlay != null) {
                 Size size = mCameraSource.getPreviewSize();
                 int min = Math.min(size.getWidth(), size.getHeight());
@@ -231,13 +224,12 @@ public class CameraSourcePreview extends ViewGroup {
      * </p>
      *
      * @param cameraSource The CameraSource built with {@link CameraSource.Builder}.
-     * @param focusMode    The focus mode. See {@link Camera.Parameters} for possible values.
      * @return true if the camera's focus is set; false otherwise.
      * @see CameraSource
      * @see Camera.Parameters
      */
     @SuppressWarnings("UnusedReturnValue")
-    public static boolean cameraFocus(@NonNull CameraSource cameraSource, @FocusMode @NonNull String focusMode) {
+    private static boolean cameraFocus(@NonNull CameraSource cameraSource) {
         Field[] declaredFields = CameraSource.class.getDeclaredFields();
 
         for (Field field : declaredFields) {
@@ -248,11 +240,11 @@ public class CameraSourcePreview extends ViewGroup {
                     if (camera != null) {
                         Camera.Parameters params = camera.getParameters();
 
-                        if (!params.getSupportedFocusModes().contains(focusMode)) {
+                        if (!params.getSupportedFocusModes().contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
                             return false;
                         }
 
-                        params.setFocusMode(focusMode);
+                        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                         camera.setParameters(params);
                         return true;
                     }

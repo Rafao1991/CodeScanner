@@ -63,17 +63,17 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     }
 
     private void loadComponents() {
-        cameraView = (CameraSourcePreview) findViewById(R.id.camera_view);
+        cameraView = findViewById(R.id.camera_view);
 
-        cameraOverlay = (GraphicOverlay) findViewById(R.id.camera_overlay);
+        cameraOverlay = findViewById(R.id.camera_overlay);
 
-        cameraOverlayTop = (GraphicOverlay) findViewById(R.id.camera_overlay_top);
+        cameraOverlayTop = findViewById(R.id.camera_overlay_top);
         cameraOverlayTop.getBackground().setAlpha(150);
 
-        cameraOverlayBottom = (GraphicOverlay) findViewById(R.id.camera_overlay_bottom);
+        cameraOverlayBottom = findViewById(R.id.camera_overlay_bottom);
         cameraOverlayBottom.getBackground().setAlpha(150);
 
-        buttonType = (Button) findViewById(R.id.button_type);
+        buttonType = findViewById(R.id.button_type);
 
         final Runnable runnable = this;
         dialog = DialogUtils.createInputDialog(
@@ -84,7 +84,11 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        sendResultIntent(((EditText) dialog.findViewById(R.id.edittext_content)).getText().toString());
+                        EditText edittextContent = dialog.findViewById(R.id.edittext_content);
+
+                        if (edittextContent != null)
+                            sendResultIntent(edittextContent.getText().toString());
+
                         dialogInterface.dismiss();
                     }
                 },
@@ -260,7 +264,7 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         }
     }
 
-    public boolean isVersionGreaterThanLollipop() {
+    private boolean isVersionGreaterThanLollipop() {
         return android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 }

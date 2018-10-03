@@ -34,9 +34,9 @@ import com.rafao.codescanner.camera.GraphicOverlay;
  */
 class BarcodeTrackerFactory implements MultiProcessor.Factory<Barcode> {
 
-    private Context context;
-    private CameraResult cameraResult;
-    private GraphicOverlay graphicOverlay;
+    private final Context context;
+    private final CameraResult cameraResult;
+    private final GraphicOverlay graphicOverlay;
 
     BarcodeTrackerFactory(GraphicOverlay graphicOverlay, CameraResult cameraResult, Context context) {
         this.graphicOverlay = graphicOverlay;
@@ -61,10 +61,10 @@ class BarcodeGraphic extends TrackedGraphic<Barcode> {
 
     private static int currentColorIndex = 0;
 
-    private Paint rectPaint;
+    private final Paint rectPaint;
     private volatile Barcode barcode;
 
-    private CameraResult cameraResult;
+    private final CameraResult cameraResult;
 
     BarcodeGraphic(GraphicOverlay overlay, CameraResult cameraResult, Context context) {
         super(overlay);

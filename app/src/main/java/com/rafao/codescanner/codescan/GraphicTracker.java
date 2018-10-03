@@ -27,8 +27,8 @@ import com.rafao.codescanner.camera.GraphicOverlay;
  * goes away.
  */
 class GraphicTracker<T> extends Tracker<T> {
-    private GraphicOverlay mOverlay;
-    private TrackedGraphic<T> mGraphic;
+    private final GraphicOverlay mOverlay;
+    private final TrackedGraphic<T> mGraphic;
 
     GraphicTracker(GraphicOverlay overlay, TrackedGraphic<T> graphic) {
         mOverlay = overlay;
@@ -39,9 +39,7 @@ class GraphicTracker<T> extends Tracker<T> {
      * Start tracking the detected item instance within the item overlay.
      */
     @Override
-    public void onNewItem(int id, T item) {
-        mGraphic.setId(id);
-    }
+    public void onNewItem(int id, T item) {}
 
     /**
      * Update the position/characteristics of the item within the overlay.

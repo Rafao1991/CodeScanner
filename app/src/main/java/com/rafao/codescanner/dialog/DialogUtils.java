@@ -15,49 +15,6 @@ import com.rafao.codescanner.R;
 
 public class DialogUtils {
 
-    public static AlertDialog createSingleButtonDialog(
-            Context context,
-            String message,
-            String positiveLabel,
-            DialogInterface.OnClickListener positiveListener) {
-
-        @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_confirmation, null);
-
-        final TextView textviewTitle = view.findViewById(R.id.textview_message);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
-        textviewTitle.setText(message);
-
-        return new AlertDialog.Builder(context)
-                .setView(view)
-                .setCancelable(false)
-                .setPositiveButton(positiveLabel, positiveListener)
-                .create();
-    }
-
-    public static AlertDialog createDoubleButtonDialog(
-            Context context,
-            String message,
-            String positiveLabel,
-            DialogInterface.OnClickListener positiveListener,
-            String negativeLabel,
-            DialogInterface.OnClickListener negativeListener) {
-
-        @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_confirmation, null);
-
-        final TextView textviewTitle = view.findViewById(R.id.textview_message);
-        textviewTitle.setTextColor(ContextCompat.getColor(context, R.color.fontGreyMain));
-        textviewTitle.setText(message);
-
-        return new AlertDialog.Builder(context)
-                .setView(view)
-                .setCancelable(false)
-                .setPositiveButton(positiveLabel, positiveListener)
-                .setNegativeButton(negativeLabel, negativeListener)
-                .create();
-    }
-
     public static AlertDialog createInputDialog(
             Context context,
             String message,
