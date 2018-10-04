@@ -12,7 +12,8 @@
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_margin="80dp">
 
         <com.rafao.codescanner.camera.GraphicOverlay
             android:id="@+id/camera_overlay"
