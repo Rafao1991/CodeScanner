@@ -68,10 +68,8 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         cameraOverlay = findViewById(R.id.camera_overlay);
 
         cameraOverlayTop = findViewById(R.id.camera_overlay_top);
-        cameraOverlayTop.getBackground().setAlpha(150);
 
         cameraOverlayBottom = findViewById(R.id.camera_overlay_bottom);
-        cameraOverlayBottom.getBackground().setAlpha(150);
 
         buttonType = findViewById(R.id.button_type);
 
@@ -192,9 +190,6 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     protected void onResume() {
         super.onResume();
         startCameraSource();
-
-        cameraOverlayTop.getBackground().setAlpha(150);
-        cameraOverlayBottom.getBackground().setAlpha(150);
     }
 
     @Override
@@ -202,9 +197,6 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         super.onPause();
         cameraView.stop();
         handler.removeCallbacks(this);
-
-        cameraOverlayTop.getBackground().setAlpha(255);
-        cameraOverlayBottom.getBackground().setAlpha(255);
     }
 
     @Override
@@ -215,8 +207,6 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
         }
 
         handler.removeCallbacks(this);
-        cameraOverlayTop.getBackground().setAlpha(255);
-        cameraOverlayBottom.getBackground().setAlpha(255);
     }
 
     @Override
