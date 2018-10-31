@@ -1,168 +1,107 @@
 package com.rafao.codescanner.codescan;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.MultiProcessor;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.rafao.codescanner.R;
-import com.rafao.codescanner.camera.CameraSourcePreview;
-import com.rafao.codescanner.camera.GraphicOverlay;
-import com.rafao.codescanner.dialog.DialogUtils;
+
+import java.io.IOException;
 
 
-public class CodeScanActivity extends AppCompatActivity implements com.rafao.codescanner.codescan.CameraResult, Runnable {
+public class CodeScanActivity extends AppCompatActivity {
 
     private final int PERMISSIONS_REQUEST_CAMERA = 1;
 
-    private CameraSourcePreview cameraView;
-    private GraphicOverlay cameraOverlay, cameraOverlayTop, cameraOverlayBottom;
-
+    private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
-
-    private AlertDialog dialog;
-
-    private Button buttonType;
-
-    private final Handler handler = new Handler();
-    private final int timer = 12000;
+    private SurfaceView cameraView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_code_scan);
 
         loadComponents();
-        loadActions();
     }
 
     private void loadComponents() {
         cameraView = findViewById(R.id.camera_view);
+        barcodeDetector = new BarcodeDetector.Builder(this)
+                .setBarcodeFormats(Barcode.QR_CODE)
+                .build();
+        cameraSource = new CameraSource
+                .Builder(this, barcodeDetector)
+                .setRequestedPreviewSize(640, 480)
+                .build();
 
-        cameraOverlay = findViewById(R.id.camera_overlay);
-
-        cameraOverlayTop = findViewById(R.id.camera_overlay_top);
-
-        cameraOverlayBottom = findViewById(R.id.camera_overlay_bottom);
-
-        buttonType = findViewById(R.id.button_type);
-
-        final Runnable runnable = this;
-        dialog = DialogUtils.createInputDialog(
-                this,
-                getResources().getString(R.string.code_scan_dialog_prompt_title),
-                getResources().getString(R.string.code_scan_dialog_prompt_hint),
-                getResources().getString(R.string.action_submit),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText edittextContent = dialog.findViewById(R.id.edittext_content);
-
-                        if (edittextContent != null)
-                            sendResultIntent(edittextContent.getText().toString());
-
-                        dialogInterface.dismiss();
-                    }
-                },
-                getResources().getString(R.string.action_try_again),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        handler.postDelayed(runnable, timer);
-                        startCameraSource();
-                        dialogInterface.cancel();
-                    }
-                });
-    }
-
-    private void loadActions() {
         if (isVersionGreaterThanLollipop()) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                     PackageManager.PERMISSION_GRANTED) {
                 createCameraSource();
-                handler.postDelayed(this, timer);
             } else {
                 requestCameraPermission();
             }
         } else {
             createCameraSource();
-            handler.postDelayed(this, timer);
         }
-
-        buttonType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                back();
-            }
-        });
     }
 
     private void createCameraSource() {
-        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(cameraOverlay, this, this);
-        barcodeDetector.setProcessor(
-                new MultiProcessor.Builder<>(barcodeFactory).build());
-
-        if (!barcodeDetector.isOperational()) {
-            IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
-            boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
-
-            if (hasLowStorage) {
-                Toast.makeText(this, R.string.error_low_storage, Toast.LENGTH_LONG).show();
+        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                try {
+                    cameraSource.start(cameraView.getHolder());
+                } catch (IOException ie) {
+                    Log.e("CAMERA SOURCE", ie.getMessage());
+                }
             }
-        }
 
-        cameraSource = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
-                .setAutoFocusEnabled(true)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .build();
-    }
-
-    private void startCameraSource() {
-        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
-                getApplicationContext());
-        if (code != ConnectionResult.SUCCESS) {
-            final int HANDLE_GMS = 9001;
-            Dialog dialog = GoogleApiAvailability
-                    .getInstance().getErrorDialog(this, code, HANDLE_GMS);
-            dialog.show();
-        }
-
-        if (cameraSource != null) {
-            try {
-                cameraView.start(cameraSource, cameraOverlay);
-            } catch (Exception e) {
-                e.printStackTrace();
-                cameraSource.release();
-                cameraSource = null;
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             }
-        }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                cameraSource.stop();
+            }
+        });
+
+        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+            @Override
+            public void release() {}
+
+            @Override
+            public void receiveDetections(Detector.Detections<Barcode> detections) {
+                if (detections.getDetectedItems().size() != 0)
+                    sendResultIntent(detections.getDetectedItems().valueAt(0).displayValue);
+            }
+        });
     }
 
     private void requestCameraPermission() {
@@ -180,43 +119,17 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.CAMERA) &&
                         grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    loadActions();
+                    createCameraSource();
                 }
             }
         }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        startCameraSource();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cameraView.stop();
-        handler.removeCallbacks(this);
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (cameraSource != null) {
-            cameraSource.release();
-        }
-
-        handler.removeCallbacks(this);
-    }
-
-    @Override
-    public void onResult(Barcode barcode) {
-        if (!barcode.rawValue.isEmpty()) {
-            if (barcode.rawValue.length() > 40)
-                sendResultIntent(barcode.rawValue);
-        } else {
-            back();
-        }
+        if (cameraSource != null) cameraSource.release();
+        if (barcodeDetector != null) barcodeDetector.release();
     }
 
     private void sendResultIntent(String value) {
@@ -245,13 +158,6 @@ public class CodeScanActivity extends AppCompatActivity implements com.rafao.cod
     private void back() {
         setResult(Activity.RESULT_CANCELED, new Intent());
         finish();
-    }
-
-    @Override
-    public void run() {
-        if (!dialog.isShowing()) {
-            dialog.show();
-        }
     }
 
     private boolean isVersionGreaterThanLollipop() {

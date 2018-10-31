@@ -1,83 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:fitsSystemWindows="true"
+    android:padding="16dp"
     tools:context=".codescan.CodeScanActivity">
 
-    <com.rafao.codescanner.camera.CameraSourcePreview
+    <SurfaceView
         android:id="@+id/camera_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="80dp">
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:background="@drawable/qr_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.rafao.codescanner.camera.GraphicOverlay
-            android:id="@+id/camera_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </com.rafao.codescanner.camera.CameraSourcePreview>
-
-    <com.rafao.codescanner.camera.GraphicOverlay
-        android:id="@+id/camera_overlay_top"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="top"
-        android:background="@color/colorOverlay"/>
-
-    <com.rafao.codescanner.camera.GraphicOverlay
-        android:id="@+id/camera_overlay_end"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:background="@color/colorOverlay"/>
-
-    <com.rafao.codescanner.camera.GraphicOverlay
-        android:id="@+id/camera_overlay_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:background="@color/colorLine"
-        android:visibility="gone"/>
-
-    <com.rafao.codescanner.camera.GraphicOverlay
-        android:id="@+id/camera_overlay_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorOverlay"/>
-
-    <com.rafao.codescanner.camera.GraphicOverlay
-        android:id="@+id/camera_overlay_start"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/colorOverlay"/>
-
-    <TextView
-        android:id="@+id/textview_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:text="@string/code_scan_prompt_hint"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:textColor="@color/colorText" />
-
-    <Button
-        android:id="@+id/button_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@color/colorButtonBackground"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:text="@string/code_scan_prompt_button"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorButtonText"/>
-
-</merge>
+</android.support.constraint.ConstraintLayout>
