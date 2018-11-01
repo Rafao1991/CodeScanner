@@ -27,7 +27,7 @@ import com.rafao.codescanner.R;
 import java.io.IOException;
 
 
-public class CodeScanActivity extends AppCompatActivity {
+public class BarCodeScanActivity extends AppCompatActivity {
 
     private final int PERMISSIONS_REQUEST_CAMERA = 1;
 
@@ -43,7 +43,7 @@ public class CodeScanActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_code_scan);
+        setContentView(R.layout.activity_bar_code_scan);
 
         loadComponents();
     }
@@ -51,11 +51,11 @@ public class CodeScanActivity extends AppCompatActivity {
     private void loadComponents() {
         cameraView = findViewById(R.id.camera_view);
         barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.QR_CODE)
+                .setBarcodeFormats(Barcode.ITF)
                 .build();
         cameraSource = new CameraSource
                 .Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(640, 480)
+                .setAutoFocusEnabled(true)
                 .build();
 
         if (isVersionGreaterThanLollipop()) {
@@ -83,8 +83,7 @@ public class CodeScanActivity extends AppCompatActivity {
             }
 
             @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            }
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
@@ -161,6 +160,6 @@ public class CodeScanActivity extends AppCompatActivity {
     }
 
     private boolean isVersionGreaterThanLollipop() {
-        return android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 }

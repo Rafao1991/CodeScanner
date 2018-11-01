@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorChoice">#76FF03</color>
-
-    <color name="colorOverlay">#0097A7</color>
+    <color name="colorOverlay">#AAAAAA</color>
     <color name="colorLine">#76FF03</color>
-
-    <color name="colorText">#FFFFFF</color>
-
-    <color name="colorButtonBackground">#76FF03</color>
-    <color name="colorButtonText">#000000</color>
-
-    <color name="fontGreyMain">#4B4B4B</color>
-    <color name="fontGreySecondary">#A6A6A6</color>
+    <color name="colorText">#292F68</color>
 </resources>
